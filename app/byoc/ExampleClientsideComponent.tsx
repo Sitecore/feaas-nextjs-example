@@ -1,22 +1,53 @@
-import React from 'react'
+'use client'
 import * as FEAAS from '@sitecore-feaas/clientside/react'
+import { useEffect, useState } from 'react'
 
 export default function ExampleClientsideComponent(props: {
   firstName: string
-  lastName: string
-  telephone: string
-  bold: boolean
+  lastName?: string
+  telephone?: string
+  bold?: boolean
+  children?: any
 }) {
+  const [counter, setCounter] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCounter((c) => c + 1)
+    }, 1000)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
-    <div style={props.bold ? { fontWeight: 'bold' } : {}}>
-      This is a simple clientside component that displays my name and my telephone. My name is {props.firstName}{' '}
-      {props.lastName} and my telephone is {props.telephone}
-    </div>
+    <>
+      <h2>Clientside</h2>
+      <dl style={props.bold ? { fontWeight: 'bold' } : {}}>
+        <dt>Description</dt>
+        <dd>Interactive UI</dd>
+        <dt>Rendered on</dt>
+        <dd>Clientside</dd>
+        <dt>Data</dt>
+        <dd>
+          {props.firstName} {props.lastName} / {props.telephone}
+        </dd>
+        <dt>Clientside hook</dt>
+        <dd>
+          <var>{counter}</var>s elapsed
+        </dd>
+        {props.children && props.children.length != 0 && (
+          <>
+            <dt>Children</dt>
+            <dd>{props.children}</dd>
+          </>
+        )}
+      </dl>
+    </>
   )
 }
 
 FEAAS.registerComponent(ExampleClientsideComponent, {
   name: 'clientside-only',
+  title: 'Clientside-only component',
   description: 'Description of my example component',
   thumbnail: 'https://mss-p-006-delivery.stylelabs.cloud/api/public/content/3997aaa0d8be4eb789f3b1541bd95c58',
   group: 'Examples',
@@ -43,7 +74,7 @@ FEAAS.registerComponent(ExampleClientsideComponent, {
   ui: {
     firstName: {
       'ui:autofocus': true,
-      'ui:emptyValue': '', // ui:emptyValue causes this field to always be valid despite being required
+      'ui:emptyValue': '',
       'ui:placeholder': 'Write your first name'
     },
     bold: {

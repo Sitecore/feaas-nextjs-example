@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@sitecore-feaas/clientside": "^0.3.10",
+    "@sitecore-feaas/clientside": "^0.3.12",
     "@types/node": "20.3.1",
     "@types/react": "18.2.13",
     "@types/react-dom": "18.2.6",

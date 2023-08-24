@@ -1,18 +1,36 @@
-import React from 'react'
 import * as FEAAS from '@sitecore-feaas/clientside/react'
 
-export default function ExampleServersideComponent(props: { firstName: string; lastName: string; telephone: string }) {
+export default async function ExampleServersideComponent(props: {
+  firstName: string
+  lastName: string
+  telephone: string
+}) {
+  const response = await fetch('http://google.com')
+  const text = await response.text()
   return (
     <>
-      This is a simple serverside component that displays my name and my telephone. My name is {props.firstName}{' '}
-      {props.lastName} and my telephone is {props.telephone}
+      <h2>Serverside</h2>
+      <dl>
+        <dt>Description</dt>
+        <dd>Static SEO-friendly content</dd>
+        <dt>Rendered on</dt>
+        <dd>{typeof window != 'undefined' ? 'Clientside' : 'Server'}</dd>
+        <dt>Data</dt>
+        <dd>
+          {props.firstName} {props.lastName} / {props.telephone}
+        </dd>
+        <dt>Async data</dt>
+        <dd>{text.length}bytes</dd>
+      </dl>
     </>
   )
 }
 
 FEAAS.registerComponent(ExampleServersideComponent, {
   name: 'serverside-only',
+  title: 'Serverside-only',
   description: 'Description of my example component',
+  thumbnail: 'https://mss-p-006-delivery.stylelabs.cloud/api/public/content/3997aaa0d8be4eb789f3b1541bd95c58',
   required: ['firstName'],
   properties: {
     firstName: {
@@ -24,9 +42,23 @@ FEAAS.registerComponent(ExampleServersideComponent, {
       title: 'Last name'
     },
     telephone: {
-      type: 'string',
+      type: 'number',
       title: 'Telephone',
       minLength: 10
+    },
+    bold: {
+      type: 'boolean',
+      title: 'Show text in bold weight'
+    }
+  },
+  ui: {
+    firstName: {
+      'ui:autofocus': true,
+      'ui:emptyValue': '',
+      'ui:placeholder': 'Write your first name'
+    },
+    bold: {
+      'ui:widget': 'radio'
     }
   }
 })

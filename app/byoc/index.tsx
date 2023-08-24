@@ -1,7 +1,7 @@
 'use client'
 
 // Embed FEAAS Clientside into a client bundle
-import '@sitecore-feaas/clientside/react'
+import * as FEAAS from '@sitecore-feaas/clientside/react'
 
 // Clientside-only component
 import './ExampleClientsideComponent'
@@ -9,5 +9,8 @@ import './ExampleClientsideComponent'
 // Component that can be rendered both on client and server
 import './ExampleHybridComponent'
 
-// Required: Exported empty fragment for Next.js to import
-export default () => <></>
+// Component that nested clientside component into server side
+import './ExampleSwappedComponent'
+// Required: A clientside for BYOC components
+// If the component needs access to context, provide it here.
+export default (props: any) => FEAAS.ExternalComponent(props)
