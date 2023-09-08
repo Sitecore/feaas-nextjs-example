@@ -1,4 +1,3 @@
-import React from 'react'
 import * as FEAAS from '@sitecore-feaas/clientside/react'
 import style from '../page.module.css'
 import dynamic from 'next/dynamic'
