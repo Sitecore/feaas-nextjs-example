@@ -8,6 +8,6 @@ export default async function ExternalComponents({
     const src = searchParams.feaasSrc
     const data = searchParams.data ? JSON.parse(searchParams.data) : {}
     return (
-        <FEAAS.ServerComponent src={src} data={data} />
+        src ? <FEAAS.ServerComponent src={src} data={data} /> : null
     )
 }
