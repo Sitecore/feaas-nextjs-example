@@ -1,0 +1,24 @@
+.page section {
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+}
+.page section > * {
+  max-width: 300px;
+  background: #eaeaea;
+  margin: 0 10px;
+  padding: 0 10px;
+  width: 300px;
+  position: relative;
+}
+
+.page section .appRouter {
+  background: rgba(230,230,250);
+}
+.page section .appRouter:before {
+  content: 'uses async component';
+  position: absolute;
+  right: 0;
+  top: -20px;;
+  font-variant: small-caps;
+}

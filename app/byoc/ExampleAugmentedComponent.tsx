@@ -1,42 +1,37 @@
 import * as FEAAS from "@sitecore-feaas/clientside/react";
 import ExampleClientsideComponent from "./ExampleClientsideComponent";
 
-export default async function ExampleWrapperComponent(props: {
+export default function ExampleAugmentedComponent(props: {
   firstName: string;
   lastName: string;
   telephone: string;
 }) {
-  const response = await fetch("http://google.com");
-  const text = await response.text();
   return (
     <>
-      <h2>Wrapper</h2>
+      <h2>Augmented</h2>
       <dl>
         <dt>Description</dt>
-        <dd>
-          Interactive UI with SEO-friendly server counterpart and data fetching
-        </dd>
-        <dt>Rendered on</dt>
-        <dd>{typeof window != "undefined" ? "Clientside" : "Server"}</dd>
-        <dt>Data</dt>
-        <dd>
-          {props.firstName} {props.lastName} / {props.telephone}
-        </dd>
-        <dt>Async data</dt>
-        <dd>{text.length}bytes</dd>
+        <dd>SEO-friendly content augmented with interactive component</dd>
+        {typeof window == "undefined" && (
+          <>
+            <dt>Rendered on</dt>
+            <dd>{typeof window != "undefined" ? "Clientside" : "Server"}</dd>
+            <dt>Data</dt>
+            <dd>
+              {props.firstName} {props.lastName} / {props.telephone}
+            </dd>
+          </>
+        )}
       </dl>
-      <ExampleClientsideComponent {...props}>
-        {text.length}bytes was fetched on server side
-      </ExampleClientsideComponent>
+      <ExampleClientsideComponent {...props} />
     </>
   );
 }
 
-FEAAS.registerComponent(ExampleWrapperComponent, {
-  name: "wrapper",
-  title: "Wrapping component",
-  description:
-    "Interactive UI with SEO-friendly server counterpart and data fetching",
+FEAAS.registerComponent(ExampleAugmentedComponent, {
+  name: "augmented",
+  title: "Augmented component",
+  description: "SEO-friendly content augmented with interactive component",
   thumbnail:
     "https://feaasstatic.blob.core.windows.net/assets/thumbnails/byoc.svg",
   group: "Examples",
