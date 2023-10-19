@@ -16,7 +16,7 @@ This is a repo that demonstrates an example of BYOC components using best practi
 
 ### XMC JSS app:
 
-If your app uses JSS (for xmc next.js), BYOC will be already pre-configured upon the app generation. Simply add the components you want in `byoc/index.client.ts` and `index.server.tsx`. Be mindful that at the time being, **jss does not support async components**
+If your app uses JSS (for xmc next.js), BYOC will be already pre-configured upon the app generation. Simply add the components you want in `byoc/index.client.tsx` and `index.server.tsx`. Be mindful that at the time being, **jss does not support async components**
 
 ### Regular Next.js app
 
